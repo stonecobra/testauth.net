@@ -12,10 +12,12 @@ module.exports = (req, res) => {
   	    return res.json({anonymous: true})
       } else {
         //this is an invalid CORS request (no origin)
-        return res.end(500);
+        res.statusCode = 500;
+        return res.end();
       }  
     } else {
       //this is an invalid request, not a POST
-      return res.end(501);
-    }
+      res.statusCode = 501;
+      return res.end();
+  }
   };
