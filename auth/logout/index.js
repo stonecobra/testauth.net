@@ -1,3 +1,5 @@
+const cookie = require('cookie');
+
 module.exports = (req, res) => {
     // POST /auth/logout
     const validOrigins = ['https://testauth.net', 'https://testpb.net', 'https://testws.net'];
@@ -8,8 +10,10 @@ module.exports = (req, res) => {
         res.setHeader('Cache-Control', 'max-age=0');
         res.setHeader('Access-Control-Allow-Origin', origin);
         res.setHeader('Access-Control-Allow-Credentials', 'true')
-        res.clearCookie('auth', {httpOnly: true, secure: true})
-  	    return res.json({anonymous: true})
+        res.setHeader('Set-Cookie', cookie.serialize('auth', null, {domain: '.testauth.net', path: '/', secure: true, httpOnly: true}));
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end('{anonymous: true}');
       } else {
         //this is an invalid CORS request (no origin)
         res.statusCode = 500;

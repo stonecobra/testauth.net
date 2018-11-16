@@ -12,17 +12,24 @@ module.exports = (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Credentials', 'true')
       if (req.cookies && req.cookies['auth']) {
+        console.log('cookies present!', req.cookies.auth);
         const profile = JSON.parse(req.cookies['auth'])
         res.setHeader('ETag', profile.tag)
-        return res.json(profile);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify(profile));
+      } else {
+        console.log('no cookies set in request')
       }
       res.setHeader('ETag', 'anonymous');
-      return res.json({anonymous: true});
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      return res.end('{anonymous: true}');
     } else {
       //this is an invalid CORS request (no origin)
       res.statusCode = 500;
       return res.end();
-  }
+    }
   } else {
       //this is an invalid request, not a GET
       res.statusCode = 501;
