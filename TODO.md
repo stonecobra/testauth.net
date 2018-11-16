@@ -1,0 +1,4 @@
+- Deploy testmg.net
+- etag for auth status
+- login/logout the brand site backend
+- 
