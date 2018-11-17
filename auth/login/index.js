@@ -16,7 +16,7 @@ module.exports = (req, res) => {
         if (!data || !data.username) return res.end(400);
       
         //we have a valid CORS request, continue
-        res.setHeader('Cache-Control', 'max-age=0');
+        res.setHeader('Cache-Control', 's-maxage=0, maxage=0');
         res.setHeader('Access-Control-Allow-Origin', origin);
         res.setHeader('Access-Control-Allow-Credentials', 'true');
   
