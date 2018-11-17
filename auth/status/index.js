@@ -12,17 +12,21 @@ module.exports = (req, res) => {
       res.setHeader('Cache-Control', 'max-age=31');
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Credentials', 'true');
-      const cookies = cookie.parse(req.headers['Cookie']);
-      console.log(`cookies: ${cookies}`);
-      if (cookies && cookies['auth']) {
-        console.log('cookies present!', cookies.auth);
-        const profile = JSON.parse(cookies['auth']);
-        res.setHeader('ETag', profile.tag);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        return res.end(JSON.stringify(profile));
-      } else {
-        console.log('no cookies set in request')
+      console.log('request headers');
+      console.dir(req.headers);
+      if (req.headers && req.headers['Cookie']) {
+        const cookies = cookie.parse(req.headers['Cookie']);
+        console.log(`cookies: ${cookies}`);
+        if (cookies && cookies['auth']) {
+          console.log('cookies present!', cookies.auth);
+          const profile = JSON.parse(cookies['auth']);
+          res.setHeader('ETag', profile.tag);
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify(profile));
+        } else {
+          console.log('no cookies set in request')
+        }
       }
       res.setHeader('ETag', 'anonymous');
       res.statusCode = 200;
