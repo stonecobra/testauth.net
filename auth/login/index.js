@@ -21,15 +21,13 @@ module.exports = (req, res) => {
         res.setHeader('Access-Control-Allow-Credentials', 'true');
   
         const username = data.username;
-        if (users[username] && users[username].profile) {
-          users[username].profile.tag = new Date().toString();
-          console.dir(profile);
-        }
-        var profile = users[username].profile
+        var profile = users[username].profile;
         if (profile) {
+          profile.tag = new Date().toString();
+          console.dir(profile);
           res.setHeader('Set-Cookie', cookie.serialize('auth', JSON.stringify(profile), {
-            domain: '.testauth.net',
-            httpOnly: true,
+            // domain: '.testauth.net',
+            // httpOnly: true,
             path: "/",
             secure: true,
             maxAge: 60 * 60 * 24 * 7 // 1 week

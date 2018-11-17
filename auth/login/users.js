@@ -1,5 +1,5 @@
 module.exports={
-	scott : {
+	"scott" : {
 		password: 'scott123',
 		profile: {
 			name: 'Scott Sanders',
@@ -7,7 +7,7 @@ module.exports={
 			username: 'scott'
 		}
 	},
-	daniel : {
+	"daniel" : {
 		password: 'daniel123',
 		profile: {
 			name: 'Daniel Stephens',
@@ -15,7 +15,7 @@ module.exports={
 			username: 'daniel'
 		}
 	},
-	tim : {
+	"tim" : {
 		password: 'tim123',
 		profile: {
 			username: 'tim',
