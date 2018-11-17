@@ -2,12 +2,6 @@
     "version": 2,
     "public": true,
     "alias": ["testauth.net"],
-    "builds": [
-        { "src": "index.html", "use": "@now/static"},
-        { "src": "auth/login/index.js", "use": "@now/node"},
-        { "src": "auth/logout/index.js", "use": "@now/node"},
-        { "src": "auth/status/index.js", "use": "@now/node"}
-    ],
     "routes": [
         { "src": "/", "dest": "index.html"},
         { "src": "/auth/login", "dest": "auth/login/index.js"},
