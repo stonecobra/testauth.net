@@ -3,7 +3,7 @@
     "public": true,
     "alias": ["testauth.net"],
     "builds": [
-        { "src": "index.html", "use": "@now/static"}
+        { "src": "index.html", "use": "@now/static"},
         { "src": "auth/login/index.js", "use": "@now/node"},
         { "src": "auth/logout/index.js", "use": "@now/node"},
         { "src": "auth/status/index.js", "use": "@now/node"}
