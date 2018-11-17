@@ -2,8 +2,14 @@
     "version": 2,
     "public": true,
     "alias": ["testauth.net"],
+    "builds": [
+        { "src": "index.html", "use": "@now/static"},
+        { "src": "auth/login/index.js", "use": "@now/node"},
+        { "src": "auth/logout/index.js", "use": "@now/node"},
+        { "src": "auth/status/index.js", "use": "@now/node"}
+    ],
     "routes": [
-        { "src": "/", "dest": "index.html"},
+        { "src": "/", "dest": "index.html", "headers": {"Cache-Control": "s-maxage=31536000, maxage=60"}},
         { "src": "/auth/login", "dest": "auth/login/index.js"},
         { "src": "/auth/logout", "dest": "auth/logout/index.js"},
         { "src": "/auth/status", "dest": "auth/status/index.js"},
