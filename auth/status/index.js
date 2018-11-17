@@ -16,16 +16,16 @@ module.exports = (req, res) => {
       console.dir(req.headers);
       if (req.headers && req.headers['cookie']) {
         const cookies = cookie.parse(req.headers['cookie']);
-        console.log(`cookies: ${cookies}`);
+        // console.log(`cookies: ${cookies}`);
         if (cookies && cookies['auth']) {
-          console.log('cookies present!', cookies.auth);
+          // console.log('cookies present!', cookies.auth);
           const profile = JSON.parse(cookies['auth']);
           res.setHeader('ETag', profile.tag);
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
           return res.end(JSON.stringify(profile));
         } else {
-          console.log('no cookies set in request')
+          console.log('no cookies set in request');
         }
       }
       res.setHeader('ETag', 'anonymous');
