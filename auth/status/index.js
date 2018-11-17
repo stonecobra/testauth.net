@@ -31,7 +31,7 @@ module.exports = (req, res) => {
       res.setHeader('ETag', 'anonymous');
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      return res.end('{anonymous: true}');
+      return res.end('{"anonymous": true}');
     } else {
       //this is an invalid CORS request (no origin)
       res.statusCode = 500;
