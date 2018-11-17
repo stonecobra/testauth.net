@@ -26,8 +26,8 @@ module.exports = (req, res) => {
           profile.tag = new Date().toString();
           console.dir(profile);
           res.setHeader('Set-Cookie', cookie.serialize('auth', JSON.stringify(profile), {
-            // domain: '.testauth.net',
-            // httpOnly: true,
+            domain: '.testauth.net',
+            httpOnly: true,
             path: "/",
             secure: true,
             maxAge: 60 * 60 * 24 * 7 // 1 week
