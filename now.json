@@ -3,14 +3,15 @@
     "public": true,
     "alias": ["testauth.net"],
     "builds": [
-        { "src": "auth/login/index.js", "use": "@now/node"},
-        { "src": "auth/logout/index.js", "use": "@now/node"},
-        { "src": "auth/status/index.js", "use": "@now/node"},
-        { "src": "index.html", "use": "@now/static"}
+        { "src": "auth/login/index.js", "use": "@now/node@canary"},
+        { "src": "auth/logout/index.js", "use": "@now/node@canary"},
+        { "src": "auth/status/index.js", "use": "@now/node@canary"},
+        { "src": "package.json", "use": "@now/static-build@canary"}
     ],
     "routes": [
         { "src": "/$", "dest": "index.html"},
         { "src": "/index.html", "dest": "index.html"},
+        { "src": "/test.html", "dest": "dist/test.html"},
         { "src": "/auth/login", "dest": "auth/login/index.js"},
         { "src": "/auth/logout", "dest": "auth/logout/index.js"},
         { "src": "/auth/status", "dest": "auth/status/index.js"},
