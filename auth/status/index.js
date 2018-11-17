@@ -14,8 +14,8 @@ module.exports = (req, res) => {
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       console.log('request headers');
       console.dir(req.headers);
-      if (req.headers && req.headers['Cookie']) {
-        const cookies = cookie.parse(req.headers['Cookie']);
+      if (req.headers && req.headers['cookie']) {
+        const cookies = cookie.parse(req.headers['cookie']);
         console.log(`cookies: ${cookies}`);
         if (cookies && cookies['auth']) {
           console.log('cookies present!', cookies.auth);
