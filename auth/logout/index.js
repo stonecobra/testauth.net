@@ -3,8 +3,9 @@ const cookie = require('cookie');
 module.exports = (req, res) => {
     // POST /auth/logout
     const validOrigins = ['https://testauth.net', 'https://testpb.net', 'https://testws.net'];
-    const origin = req.url.origin;
-    if (req.method === 'POST') {
+    const origin = req.headers['origin'];
+    console.log(`origin: ${origin}`);
+      if (req.method === 'POST') {
       if (origin && validOrigins.includes(origin) ) {
         //we have a valid CORS request, continue
         res.setHeader('Cache-Control', 'max-age=0');

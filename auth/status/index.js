@@ -3,7 +3,8 @@
 module.exports = (req, res) => {
   // GET /auth/status
   const validOrigins = ['https://testauth.net', 'https://testpb.net', 'https://testws.net'];
-  const origin = req.url.origin;
+  const origin = req.headers['origin'];
+  console.log(`origin: ${origin}`);
   if (req.method === 'GET') {
     if (origin && validOrigins.includes(origin)) {
       //we have a valid CORS request, continue
