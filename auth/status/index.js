@@ -1,4 +1,4 @@
-// const cookie = require('cookie');
+const cookie = require('cookie');
 
 module.exports = (req, res) => {
   // GET /auth/status
@@ -12,10 +12,11 @@ module.exports = (req, res) => {
       res.setHeader('Cache-Control', 'max-age=31');
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Credentials', 'true');
-      console.log(`cookies: ${req.cookies}`);
-      if (req.cookies && req.cookies['auth']) {
-        console.log('cookies present!', req.cookies.auth);
-        const profile = JSON.parse(req.cookies['auth']);
+      const cookies = cookie.parse(req.headers['Cookie']);
+      console.log(`cookies: ${cookies}`);
+      if (cookies && cookies['auth']) {
+        console.log('cookies present!', cookies.auth);
+        const profile = JSON.parse(cookies['auth']);
         res.setHeader('ETag', profile.tag);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
