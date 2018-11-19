@@ -3,18 +3,12 @@
     "public": true,
     "alias": ["testauth.net"],
     "builds": [
-        { "src": "auth/login/index.js", "use": "@now/node"},
-        { "src": "auth/logout/index.js", "use": "@now/node"},
-        { "src": "auth/status/index.js", "use": "@now/node"},
         { "src": "package.json", "use": "@now/static-build"}
     ],
     "routes": [
         { "src": "/$", "dest": "dist/index.html"},
         { "src": "/index.html", "dest": "index.html"},
         { "src": "/test.html", "dest": "dist/test.html"},
-        { "src": "/auth/login", "dest": "auth/login/index.js"},
-        { "src": "/auth/logout", "dest": "auth/logout/index.js"},
-        { "src": "/auth/status", "dest": "auth/status/index.js"},
         { "src": "/.*", "status": 403}
     ]
 }
