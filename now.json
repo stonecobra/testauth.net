@@ -2,6 +2,7 @@
     "version": 2,
     "public": true,
     "alias": ["testauth.net"],
+    "distDir": "dist",
     "builds": [
         { "src": "package.json", "use": "@now/static-build@canary"}
     ],
