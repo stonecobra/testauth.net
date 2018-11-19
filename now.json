@@ -2,15 +2,15 @@
     "version": 2,
     "public": true,
     "alias": ["testauth.net"],
-    "distDir": "dist",
     "builds": [
-        { "src": "package.json", "use": "@now/static-build@canary"}
+        { "src": "auth/login/index.js", "use": "@now/node"},
+        { "src": "auth/logout/index.js", "use": "@now/node"},
+        { "src": "auth/status/index.js", "use": "@now/node"}
     ],
     "routes": [
-        { "src": "/$", "dest": "dist/index.html"},
-        { "src": "/index.html", "dest": "index.html"},
-        { "src": "/test.html", "dest": "test.html"},
-        { "src": "/test", "dest": "dist/test.html"},
+        { "src": "/auth/login", "dest": "auth/login/index.js"},
+        { "src": "/auth/logout", "dest": "auth/logout/index.js"},
+        { "src": "/auth/status", "dest": "auth/status/index.js"},
         { "src": "/.*", "status": 403}
     ]
 }
