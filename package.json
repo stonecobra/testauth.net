@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "ISC",
   "scripts": {
-    "now-build": "touch dist/test.html && ls -al dist && true"
+    "now-build": "mkdir -p dist && cp test.html index.html dist/ && ls -al dist/ && true"
   },
   "dependencies": {
     "cookie": "^0.3.1",
