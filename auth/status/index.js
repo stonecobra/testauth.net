@@ -9,7 +9,7 @@ module.exports = (req, res) => {
     if (origin && validOrigins.includes(origin)) {
       //we have a valid CORS request, continue
       // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
-      res.setHeader('Cache-Control', 's-maxage=0, maxage=0');
+      res.setHeader('Cache-Control', 'maxage=0');
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       console.log('request headers');
