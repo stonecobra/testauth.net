@@ -9,7 +9,8 @@ module.exports = (req, res) => {
     if (origin && validOrigins.includes(origin)) {
       //we have a valid CORS request, continue
       // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
-      res.setHeader('Cache-Control', 'maxage=0');
+      res.setHeader('Cache-Control', 'no-cache');
+      // test comment
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       console.log('request headers');
@@ -18,7 +19,7 @@ module.exports = (req, res) => {
         const cookies = cookie.parse(req.headers['cookie']);
         // console.log(`cookies: ${cookies}`);
         if (cookies && cookies['auth']) {
-          // console.log('cookies present!', cookies.auth);
+          console.log('cookies present!', cookies.auth);
           const profile = JSON.parse(cookies['auth']);
           res.setHeader('ETag', profile.tag);
           res.statusCode = 200;
@@ -28,6 +29,8 @@ module.exports = (req, res) => {
           console.log('no cookies set in request');
         }
       }
+      // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
+      res.setHeader('Cache-Control', 'no-cache');
       res.setHeader('ETag', 'anonymous');
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
@@ -35,11 +38,11 @@ module.exports = (req, res) => {
     } else {
       //this is an invalid CORS request (no origin)
       res.statusCode = 500;
-      return res.end();
+      return res.end('Invalid CORS Origin');
     }
   } else {
     //this is an invalid request, not a GET
     res.statusCode = 501;
-    return res.end();
+    return res.end('Only GET is supported for this API');
   }
 };

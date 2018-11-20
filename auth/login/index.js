@@ -16,7 +16,7 @@ module.exports = (req, res) => {
         if (!data || !data.username) return res.end(400);
       
         //we have a valid CORS request, continue
-        res.setHeader('Cache-Control', 's-maxage=0, maxage=0');
+        res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Access-Control-Allow-Origin', origin);
         res.setHeader('Access-Control-Allow-Credentials', 'true');
   
@@ -33,21 +33,25 @@ module.exports = (req, res) => {
             maxAge: 60 * 60 * 24 * 7 // 1 week
           }));
           res.statusCode = 200;
+          // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
+          res.setHeader('Cache-Control', 'no-cache');
           res.setHeader('Content-Type', 'application/json');
           return res.end(JSON.stringify(profile));
         }
         res.statusCode = 200;
+        // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
+        res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Content-Type', 'application/json');
         return res.end('{"anonymous": true}');
       });
     } else {
       //this is an invalid CORS request (no origin)
       res.statusCode = 500;
-      return res.end();
+      return res.end('Invalid CORS Origin');
     }
   } else {
     //this is an invalid request, not a POST
     res.statusCode = 501;
-    return res.end();
+    return res.end('Only POST is supported for this API');
   }
 };
