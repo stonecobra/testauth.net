@@ -4,21 +4,19 @@ const users = require('../users');
 
 module.exports = (req, res) => {
   // POST /auth/login
-  const validOrigins = ['https://testauth.net', 'https://testpb.net', 'https://testws.net'];
+  const validOrigins = ['https://testauth.net'];
   const origin = req.headers['origin'];
   console.log(`origin: ${origin}`);
   if (req.method === 'POST') {
-    console.log('login request is a POST request', req.url);
+    console.log('loginitp request is a POST request', req.url);
     if (origin && validOrigins.includes(origin)) {
       const data = parse(req).then(data => {
         // make sure we have a body to process
-        console.log(`login attempting login: ${data.username}`);
+        console.log(`loginitp attempting login: ${data.username}`);
         if (!data || !data.username) return res.end(400);
       
         //we have a valid CORS request, continue
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Access-Control-Allow-Origin', origin);
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Location', `https://testws.net?username=${data.username}`);
   
         const username = data.username;
         var profile = users[username].profile;
@@ -32,11 +30,11 @@ module.exports = (req, res) => {
             secure: true,
             maxAge: 60 * 60 * 24 * 7 // 1 week
           }));
-          res.statusCode = 200;
+          res.statusCode = 301;
           // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');
-          res.setHeader('Cache-Control', 'no-cache');
-          res.setHeader('Content-Type', 'application/json');
-          return res.end(JSON.stringify(profile));
+        //   res.setHeader('Cache-Control', 'no-cache');
+        //   res.setHeader('Content-Type', 'application/json');
+          return res.end();
         }
         res.statusCode = 200;
         // res.setHeader('Vary', 'Cookie, Access-Control-Allow-Origin');

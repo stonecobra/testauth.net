@@ -6,6 +6,7 @@ module.exports = (req, res) => {
   const origin = req.headers['origin'];
   console.log(`origin: ${origin}`);
   if (req.method === 'POST') {
+    console.log('logout request is a POST request', req.url);
     if (origin && validOrigins.includes(origin)) {
       //we have a valid CORS request, continue
       res.setHeader('Cache-Control', 'no-cache');
