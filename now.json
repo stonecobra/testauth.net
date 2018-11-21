@@ -9,6 +9,11 @@
         { "src": "package.json", "use": "@now/static-build"}
     ],
     "routes": [
+        { "src": "/$", "dest": "index.html"},
+        { "src": "/favicon.ico", "dest": "favicon.ico"},
+        { "src": "/test.html", "dest": "test.html"},
+        { "src": "/login.html", "dest": "login.html"},
+        { "src": "/css/(.*)", "dest": "css/$1"},
         { "src": "/auth/login", "dest": "auth/login/index.js"},
         { "src": "/auth/logout", "dest": "auth/logout/index.js"},
         { "src": "/auth/status", "dest": "auth/status/index.js"},
